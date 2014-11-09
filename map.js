@@ -1,31 +1,24 @@
-var map = {
-  x: 0,
-  y: 0,
-  noTread: level1,
-  image: new Image(),
-  ready: false,
- polygons: []
-}
+var Map = function(src, x, y, noTread) {
 
-map.image.onload = function() {
-  map.ready = true;
-  player.x = 100;
-  player.y = 100;
-};
-
-map.image.src = "images/level1.png";
-
-for (i in  map.noTread.objects) {
-  var object =  map.noTread.objects[i];
-  var newPolygon = [];
-  
-  for (i in object.polygon) {
-    var coordinates = object.polygon[i];
-    newPolygon.push({
-      x: coordinates.x + object.x,
-      y: coordinates.y + object.y
+  function F() {
+    this.polygons = [];
+    var self = this;
+    
+    noTread.objects.forEach(function(object) {
+      var newPolygon = [];
+      
+      object.polygon.forEach(function(coordinates){
+        newPolygon.push({
+          x: coordinates.x + object.x,
+          y: coordinates.y + object.y
+        });
+      });
+    
+      self.polygons.push(newPolygon);
     });
   };
 
-  map.polygons.push(newPolygon);
+  F.prototype = new Sprite(src, x, y);
+  return new F();
+
 }
