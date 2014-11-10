@@ -17,8 +17,8 @@ var distanceBetween = function(a, b) {
 // Handy area transition function. Everything that happens when you change areas happens in here.
 var travelTo = function(targetArea, direction) {
    target.active = false;
-   area = targetArea;
-   player.x = area.startpoints[direction].x;
-   player.y = area.startpoints[direction].y;
+   currentArea = targetArea;
+   player.x = currentArea.startpoints[direction].x;
+   player.y = currentArea.startpoints[direction].y;
    camera.reset();
 }

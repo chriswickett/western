@@ -72,12 +72,13 @@ var update = function() {
     y: player.y + yVec * moveMultiplier
   }
   
-  currentArea.polygons.forEach(function(polygon) {
+  for (i in currentArea.polygons) {
+    var polygon = currentArea.polygons[i];
     if (isPointInPoly(polygon, requestedXY)) {
       var cannotMove = true;
       break;
     }
-  })
+  }
 
   if (cannotMove) {
     target.active = false; return false;
@@ -90,8 +91,9 @@ var update = function() {
 
   // Handle area transitions
   if (currentArea == area1 && player.y > currentArea.startpoints.south.y) {
-    travelTo(area2, "north"); 
+    travelTo(area2, "north");
   }
+
   if (currentArea == area2 && player.y < currentArea.startpoints.north.y) {
     travelTo(area1, "south");
   }
@@ -102,12 +104,11 @@ var update = function() {
 var render = function () {
   
   // Clear the canvas
-  ctx.fillStyle = "black";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   // Draw background
   if (currentArea.ready) {
-    ctx.drawImage(currentArea.image, currentArea.x - camera.x, currentArea.y - camera.y);
+    ctx.drawImage(currentArea.image, 0 - camera.x, 0 - camera.y);
   }
 
   // Draw target
@@ -118,6 +119,7 @@ var render = function () {
   // Draw player
   if (player.ready) {
     ctx.drawImage(player.image, (player.x - player.width / 2) - camera.x, (player.y - player.height / 2) - camera.y );
+
   }
   
   // Draw XY target co-ordinates
