@@ -1,10 +1,11 @@
 var Sprite = function(src, x, y) {
+  
+  var self = this;
+  
   this.x = x;
   this.y = y;
   this.ready = false;
   this.image = new Image();
-
-  var self = this;
 
   this.image.onload = function() {
     self.ready = true;
