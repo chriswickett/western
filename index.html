@@ -1,23 +1,26 @@
 <!DOCTYPE>
 <html>
   <head>
-    <title>Wickett RPG Game v1</title>
+    <title>Western Game</title>
     <style>
+
       body {
         background-color: #333;
       }
-      
-      #game-holder {
+    
+      /* Center the game */  
+    /*  #game-holder {
         position: fixed;
         left: 50%;
         top: 50%;
         margin: -220px 0 0 -220px;
-      }
+      }*/
       
-      canvas {
+      /* Fix offset problems */
+/*      canvas {
         position: relative;
         cursor: pointer;
-      }
+      }*/
     
     </style>
   </head>
@@ -26,11 +29,12 @@
       <canvas id='game' width='440' height='440'></canvas>
     </div>
 
-    <script src='helpers/helpers.js'></script>
-    <script src="sprite.js"></script>
-    <script src="area.js"></script>
-    <script src='levels/level1.js'></script>
-    <script src='levels/level2.js'></script>
+    <!-- <script src='helpers/helpers.js'></script> -->
+    <!-- <script src="sprite.js"></script> -->
+    <!-- <script src="area.js"></script> -->
+    <!-- <script src='levels/level1.js'></script> -->
+    <!-- <script src='levels/level2.js'></script> -->
+    <script src='phaser.min.js'></script>
     <script src='game.js'></script>
   </body>
 </html>
