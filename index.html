@@ -1,40 +1,27 @@
 <!DOCTYPE>
 <html>
   <head>
-    <title>Western Game</title>
+    <title>Wolf game</title>
+    
     <style>
 
       body {
         background-color: #333;
       }
     
-      /* Center the game */  
-    /*  #game-holder {
-        position: fixed;
-        left: 50%;
-        top: 50%;
-        margin: -220px 0 0 -220px;
-      }*/
-      
-      /* Fix offset problems */
-/*      canvas {
-        position: relative;
-        cursor: pointer;
-      }*/
-    
     </style>
+
   </head>
   <body>
-    <div id='game-holder'>
-      <canvas id='game' width='440' height='440'></canvas>
-    </div>
-
-    <!-- <script src='helpers/helpers.js'></script> -->
-    <!-- <script src="sprite.js"></script> -->
-    <!-- <script src="area.js"></script> -->
-    <!-- <script src='levels/level1.js'></script> -->
-    <!-- <script src='levels/level2.js'></script> -->
-    <script src='phaser.min.js'></script>
-    <script src='game.js'></script>
+    <script src='js/phaser.min.js'></script>
+    <script src='js/helpers.js'></script>
+    <script src='js/player.js'></script>
+    <script src='js/AI.js'></script>
+    <script src='js/is_walker.js'></script>
+    <script src='js/is_intelligent.js'></script>
+    <script src='js/living.js'></script>
+    <script src='js/enemy.js'></script>
+    <script src='js/wolf.js'></script>
+    <script src='js/game.js'></script>
   </body>
 </html>
