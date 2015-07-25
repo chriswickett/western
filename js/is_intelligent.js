@@ -1,7 +1,7 @@
-function IsIntelligent(behaviourTree, actor) {
+function IsIntelligent (behaviourTree, actor) {
 
   var intelligence = {
-    reactionTime: 150,
+    reactionTime: 350,
     clock: 0,
     ai: new AI(behaviourTree, actor)
   };

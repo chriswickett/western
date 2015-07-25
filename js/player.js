@@ -1,4 +1,3 @@
-
 function Player (game, key, x, y) {
 
   function _Player() {

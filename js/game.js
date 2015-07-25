@@ -42,9 +42,16 @@ function PhaserGame() {
       // Spawn objects
       var playerPos = this.game.findObjectsByType('playerStart', this.game.map, 'objectLayer');
       var wolfPos = this.game.findObjectsByType('wolfStart', this.game.map, 'objectLayer');
+      
       this.game.player = new Player(this.game, 'player', playerPos[0].x, playerPos[0].y);
       this.game.wolf = new Wolf(this.game, 'animals', wolfPos[0].x, wolfPos[0].y, this.game.player),
+      this.game.chicken = new Chicken(this.game, 'animals', 100, 100);
 
+      this.game.livings = [
+        this.game.wolf,
+        this.game.player,
+        this.game.chicken
+      ];
 
       // Set up camera
       this.game.camera.follow(this.game.player);

@@ -14,7 +14,6 @@ function Wolf(game, key, x, y, master) {
       this.clock += this.game.time.physicsElapsedMS;
 
       if (this.clock > this.reactionTime) {
-        this.distanceFromMaster = this.getDistanceFromMaster();
         this.ai.decide(); 
         this.clock = 0;
       }
@@ -27,7 +26,7 @@ function Wolf(game, key, x, y, master) {
     },
 
     idlePossible: function() {
-      return (this.distanceFromMaster < this.worriedDistance);
+      return (this.getDistanceFromMaster() < this.worriedDistance && this.livingsInView().length === 0);
     },
 
     idle: function() {
@@ -36,8 +35,17 @@ function Wolf(game, key, x, y, master) {
       this.animations.stop();
     },
 
+    chasePossible: function() {
+      return (this.livingsInView("Neutral").length > 0);
+    },
+
+    chase: function() {
+      this.waypoint = this.livingsInView('Neutral')[0].body.position;
+      console.log("Grrr! I'm gonna eat it!");
+    },  
+
     followPossible: function() {
-      return (this.distanceFromMaster > this.safeDistance);
+      return (this.getDistanceFromMaster() > this.safeDistance && this.livingsInView("Neutral").length === 0);
     },
 
     follow: function() {
@@ -72,16 +80,17 @@ function Wolf(game, key, x, y, master) {
     name: 'idle',
     children: [
       {
-        name: 'follow',
-        children: [ { name: 'greet' } ]
+        name: 'chase'
       },
       {
-        name: 'fight'
+        name: 'follow',
+        children: [ { name: 'greet' } ]
       },
     ]
   };
 
   extend(_Wolf, IsIntelligent(behaviourTree, _Wolf));
+  extend(_Wolf, SeesLivings(250));
 
   return _Wolf;
 }

@@ -18,7 +18,7 @@ function IsWalker (frames, animFPS, maxSpeed) {
       
       var distanceFromWaypoint = this.getDistanceFromWaypoint();
       
-      if (distanceFromWaypoint < 10) {
+      if (distanceFromWaypoint < 75) {
         this.stop(); return false;
       }
 
