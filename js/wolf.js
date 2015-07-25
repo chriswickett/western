@@ -8,25 +8,44 @@ function Wolf(game, key, x, y, master) {
     lonely: false,
     worriedDistance: 130,
     safeDistance: 100,
+    currentCommand: null,
+    memoryClock: 0,
+    attentionSpan: 4000,
 
     update: function() {
 
-      this.clock += this.game.time.physicsElapsedMS;
+      this.aiClock += this.game.time.physicsElapsedMS;
+      this.memoryClock += this.game.time.physicsElapsedMS;
 
-      if (this.clock > this.reactionTime) {
-        this.ai.decide(); 
-        this.clock = 0;
+      if (this.aiClock > this.reactionTime) {
+        this.ai.decide();
+        this.aiClock = 0;
+      }
+
+      if (this.memoryClock > this.attentionSpan) {
+        this.currentCommand = null;
+        this.memoryClock = 0;
       }
 
       if (!!this.waypoint) this.moveToWaypoint();
+
+      console.log(this.currentCommand);
     },
 
     getDistanceFromMaster: function() {
       return this.getDistanceFromPoint(this.master.body.position);
     },
 
+    isCloseToMaster: function() {
+      return (this.getDistanceFromMaster() < this.worriedDistance);
+    },
+
+    canSeeAnimals: function() {
+      return (this.livingsInView().length === 0);
+    },
+
     idlePossible: function() {
-      return (this.getDistanceFromMaster() < this.worriedDistance && this.livingsInView().length === 0);
+      return (this.isCloseToMaster() && !this.canSeeAnimals());
     },
 
     idle: function() {
@@ -41,7 +60,6 @@ function Wolf(game, key, x, y, master) {
 
     chase: function() {
       this.waypoint = this.livingsInView('Neutral')[0].body.position;
-      console.log("Grrr! I'm gonna eat it!");
     },  
 
     followPossible: function() {
@@ -61,6 +79,16 @@ function Wolf(game, key, x, y, master) {
       console.log('Woof!');
       this.lonely = false;
     },
+
+    hearCommand: function(command) {
+      var knownCommands = ['stay', 'follow'];
+      if (knownCommands.indexOf(command) > -1) {
+        this.memoryClock = 0;
+        this.currentCommand = command;
+      } else {
+        console.error("Invalid wolf command: " + command);
+      }
+    }
   };
 
   extend(_Wolf, _WolfBehavior);

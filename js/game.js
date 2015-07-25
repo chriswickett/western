@@ -63,6 +63,17 @@ function PhaserGame() {
 
     update: function() {
 
+      var followKey = this.game.input.keyboard.addKey(Phaser.Keyboard.F);
+      var stayKey = this.game.input.keyboard.addKey(Phaser.Keyboard.S);
+
+      if (stayKey.isDown) {
+        this.game.wolf.hearCommand('stay');
+      }
+
+      if (followKey.isDown) {
+        this.game.wolf.hearCommand('follow');
+      }
+
       this.game.physics.arcade.collide(this.game.wolf, this.game.blockedLayer);
       this.game.physics.arcade.collide(this.game.player, this.game.blockedLayer);
 

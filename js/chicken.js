@@ -8,11 +8,11 @@ function Chicken(game, key, x, y) {
 
     update: function() {
 
-      this.clock += this.game.time.physicsElapsedMS;
+      this.aiClock += this.game.time.physicsElapsedMS;
 
-      if (this.clock > this.reactionTime) {
+      if (this.aiClock > this.reactionTime) {
         this.ai.decide(); 
-        this.clock = 0;
+        this.aiClock = 0;
       }
 
       if (!!this.waypoint) this.moveToWaypoint();
@@ -32,7 +32,6 @@ function Chicken(game, key, x, y) {
     },
 
     graze: function() {
-      console.log('Peck peck peck');
     },
 
   };
